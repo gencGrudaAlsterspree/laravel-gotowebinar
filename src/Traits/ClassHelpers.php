@@ -44,6 +44,10 @@ trait ClassHelpers
 
     public function determineLocale()
     {
+        if(($iso = config('app.locale_iso', false))) {
+            return $iso;
+        }
+
         switch (strtolower(config('app.locale'))) {
             case 'en':
                 return 'en_US';
