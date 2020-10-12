@@ -3,17 +3,28 @@
 namespace Slakbal\Gotowebinar\Commands;
 
 use Illuminate\Console\Command;
+use Slakbal\Gotowebinar\Client\GotoClient;
 use Slakbal\Gotowebinar\Facade\Webinars;
 
 class GoToAccessTokenCommand extends Command
 {
 
-    protected $signature = 'goto:access-token {--flush} {--flush-only}';
+    protected $signature = 'goto:access-token {--flush} {--flush-only} {--ready}';
 
-    protected $description = 'Exchange the authorization code for an access-token.';
+    protected $description = 'Control access and/or refresh tokens.';
 
     public function handle()
     {
+        if($this->option('ready')) {
+            if(app(GotoClient::class)->hasAccessToken()) {
+                $this->info('Valid access-token present.');
+            }
+            else {
+                $this->line('<error>!!</error> Valid-access token missing.');
+            }
+            return;
+        }
+
         if(($flush_only = $this->option('flush-only')) || $this->option('flush')) {
             $result = Webinars::flushAuthentication()->status();
             $this->call('cache:clear', );
@@ -24,7 +35,7 @@ class GoToAccessTokenCommand extends Command
             }
         }
 
-        $result = (array)Webinars::authenticate()->status();
+        $result = (array)Webinars::authenticate()->status(false);
 
         if(!empty($result)) {
             if(array_key_exists('access_token', $result)) {

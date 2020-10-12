@@ -10,43 +10,43 @@ trait AccessProvider
 {
     protected $cache_tags = ['GOTO', 'GOTO-AUTH'];
 
-    public function status()
+    public function status($limit = true)
     {
         return [
-            'ready' => $this->hasAccessToken(),
+            'ready' => $this->hasAccessToken() ? 'true' : 'false',
             'access_token' => Str::limit($this->getAccessToken(), 10),
             'refresh_token' => Str::limit($this->getRefreshToken(), 10),
-            'organiser_key' => Str::limit($this->getOrganizerKey(), 8),
-            'account_key' => Str::limit($this->getAccountKey(), 8),
+            'organiser_key' => $limit ? Str::limit($this->getOrganizerKey(), 8) : $this->getOrganizerKey(),
+            'account_key' => $limit ? Str::limit($this->getAccountKey(), 8) : $this->getAccountKey(),
         ];
     }
 
-    private function getAuthenticationHeader()
+    public function getAuthenticationHeader()
     {
         return ['Authorization' => 'Basic '.base64_encode($this->getClientId().':'.$this->getClientSecret())];
     }
 
-    private function getClientId()
+    public function getClientId()
     {
         return config('goto.client_id'); //Consumer Key = Client Id
     }
 
-    private function getClientSecret()
+    public function getClientSecret()
     {
         return config('goto.client_secret');
     }
 
-    private function getAuthorisationHeader()
+    public function getAuthorisationHeader()
     {
         return ['Authorization' => 'Bearer '.$this->getAccessToken()];
     }
 
-    private function getAccessToken()
+    public function getAccessToken()
     {
         return Cache::tags($this->cache_tags)->get('access-token');
     }
 
-    private function setAccessInformation($responseObject)
+    public function setAccessInformation($responseObject)
     {
         $this->setAccessToken($responseObject->access_token, $responseObject->expires_in)
              ->setRefreshToken($responseObject->refresh_token)
@@ -56,60 +56,60 @@ trait AccessProvider
         return $this;
     }
 
-    private function setAccountKey($accountKey)
+    public function setAccountKey($accountKey)
     {
         Cache::tags($this->cache_tags)->forever('account-key', $accountKey);
 
         return $this;
     }
 
-    private function setOrganizerKey($organizerKey)
+    public function setOrganizerKey($organizerKey)
     {
         Cache::tags($this->cache_tags)->forever('organizer-key', $organizerKey);
 
         return $this;
     }
 
-    private function setRefreshToken($refreshToken, $ttlSeconds = null)
+    public function setRefreshToken($refreshToken, $ttlSeconds = null)
     {
         Cache::tags($this->cache_tags)->put('refresh-token', $refreshToken, $ttlSeconds ?? Carbon::now()->addDays(30));
 
         return $this;
     }
 
-    private function setAccessToken($accessToken, $ttlSeconds = null)
+    public function setAccessToken($accessToken, $ttlSeconds = null)
     {
         Cache::tags($this->cache_tags)->put('access-token', $accessToken, $ttlSeconds ?? Carbon::now()->addHour());
 
         return $this;
     }
 
-    private function hasAccessToken()
+    public function hasAccessToken()
     {
         return Cache::tags($this->cache_tags)->has('access-token');
     }
 
-    private function getOrganizerKey()
+    public function getOrganizerKey()
     {
         return Cache::tags($this->cache_tags)->get('organizer-key');
     }
 
-    private function getAccountKey()
+    public function getAccountKey()
     {
         return Cache::tags($this->cache_tags)->get('account-key');
     }
 
-    private function hasRefreshToken()
+    public function hasRefreshToken()
     {
         return Cache::tags($this->cache_tags)->has('refresh-token');
     }
 
-    private function getRefreshToken()
+    public function getRefreshToken()
     {
         return Cache::tags($this->cache_tags)->get('refresh-token');
     }
 
-    private function clearAuthCache()
+    public function clearAuthCache()
     {
         Cache::tags('GOTO-AUTH')->flush();
 

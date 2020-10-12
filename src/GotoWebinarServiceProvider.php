@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Slakbal\Gotowebinar\Commands\GoToAccessTokenCommand;
 use Slakbal\Gotowebinar\Commands\GoToAuthorizeLinkCommand;
 use Slakbal\Gotowebinar\Commands\GoToGenerateLinkCommand;
+use Slakbal\Gotowebinar\Commands\GoToTokensCommand;
 use Slakbal\Gotowebinar\Resources\Attendee\Attendee;
 use Slakbal\Gotowebinar\Resources\Registrant\Registrant;
 use Slakbal\Gotowebinar\Resources\Session\Session;
@@ -28,7 +29,8 @@ class GotoWebinarServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 GoToGenerateLinkCommand::class,
-                GoToAccessTokenCommand::class
+                GoToAccessTokenCommand::class,
+                GoToTokensCommand::class
             ]);
         }
     }
