@@ -4,12 +4,12 @@ namespace Slakbal\Gotowebinar\Client;
 
 use Httpful\Mime;
 use Httpful\Request;
-use Illuminate\Support\Facades\Log;
 use Slakbal\Gotowebinar\Exception\GotoException;
+use Slakbal\Gotowebinar\Traits\Debug;
 
 final class GotoClient
 {
-    use Authenticable, PathBuilder;
+    use Authenticable, PathBuilder, Debug;
 
     protected $strict_ssl = false;
 
@@ -65,8 +65,8 @@ final class GotoClient
 
         $path = $this->buildUrl($this->path, $this->parameters);
 
-        Log::info('GotoWebinar:', ['verb' => 'GET', 'path' => $path]);
-        
+        static::logInfo('GotoWebinar:', ['verb' => 'GET', 'path' => $path]);
+
         $response = Request::get($path)
                            ->strictSSL($this->strict_ssl)
                            ->addHeaders($this->getAuthorisationHeader())
@@ -83,7 +83,7 @@ final class GotoClient
 
         $path = $this->buildUrl($this->path, $this->parameters);
 
-        Log::info('GotoWebinar:', ['verb' => 'POST', 'path' => $path]);
+        static::logInfo('GotoWebinar:', ['verb' => 'POST', 'path' => $path]);
 
         $response = Request::post($path)
                            ->strictSSL($this->strict_ssl)
@@ -102,7 +102,7 @@ final class GotoClient
 
         $path = $this->buildUrl($this->path, $this->parameters);
 
-        Log::info('GotoWebinar:', ['verb' => 'PUT', 'path' => $path]);
+        static::logInfo('GotoWebinar:', ['verb' => 'PUT', 'path' => $path]);
 
         $response = Request::put($path)
                            ->strictSSL($this->strict_ssl)
@@ -121,7 +121,7 @@ final class GotoClient
 
         $path = $this->buildUrl($this->path, $this->parameters);
 
-        Log::info('GotoWebinar:', ['verb' => 'DELETE', 'path' => $path]);
+        static::logInfo('GotoWebinar:', ['verb' => 'DELETE', 'path' => $path]);
 
         $response = Request::delete($path)
                            ->strictSSL($this->strict_ssl)
