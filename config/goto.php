@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'debug' => env('GOTO_DEBUG', false),
+
     'client_id' => env('GOTO_CONSUMER_KEY', 'someConsumerKey'),
     'client_secret' => env('GOTO_CONSUMER_SECRET', 'someConsumerSecret'),
     'direct_username' => env('GOTO_DIRECT_USERNAME', 'someUsername'),

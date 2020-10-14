@@ -3,15 +3,17 @@
 namespace Slakbal\Gotowebinar\Exception;
 
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
+use Slakbal\Gotowebinar\Traits\Debug;
 
 class GotoException extends \Exception
 {
+    use Debug;
+
     public static function responseException($response, $customMessage = null, $verb = null)
     {
         $message = self::getResponseMessage($response, $customMessage);
 
-        Log::error('GotoWebinar: '.self::formatVerb($verb).$message.' - Payload: '.json_encode($response->body));
+        static::logError('GotoWebinar: '.self::formatVerb($verb).$message.' - Payload: '.json_encode($response->body));
 
         return new static($message);
     }
