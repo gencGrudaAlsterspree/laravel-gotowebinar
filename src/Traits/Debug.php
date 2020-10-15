@@ -23,7 +23,7 @@ trait Debug
         }
     }
 
-    static function debugError($msg, $context = [])
+    static function logError($msg, $context = [])
     {
         if(static::$debug) {
             Log::error($msg, $context);
