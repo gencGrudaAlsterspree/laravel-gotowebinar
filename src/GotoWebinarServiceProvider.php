@@ -3,10 +3,12 @@
 namespace Slakbal\Gotowebinar;
 
 use Illuminate\Support\ServiceProvider;
+use Slakbal\Gotowebinar\Client\GotoClient;
 use Slakbal\Gotowebinar\Commands\GoToAccessTokenCommand;
 use Slakbal\Gotowebinar\Commands\GoToAuthorizeLinkCommand;
 use Slakbal\Gotowebinar\Commands\GoToGenerateLinkCommand;
 use Slakbal\Gotowebinar\Commands\GoToTokensCommand;
+use Slakbal\Gotowebinar\Contract\GotoClientContract;
 use Slakbal\Gotowebinar\Resources\Attendee\Attendee;
 use Slakbal\Gotowebinar\Resources\Registrant\Registrant;
 use Slakbal\Gotowebinar\Resources\Session\Session;
@@ -30,6 +32,7 @@ class GotoWebinarServiceProvider extends ServiceProvider
             $this->commands([
                 GoToGenerateLinkCommand::class,
                 GoToAccessTokenCommand::class,
+                // GoToRefreshTokenCommand::class,
                 GoToTokensCommand::class
             ]);
         }
@@ -37,8 +40,10 @@ class GotoWebinarServiceProvider extends ServiceProvider
 
     public function register()
     {
-        //runtime merge config
+        // runtime merge config
         $this->mergeConfigFrom(__DIR__.'/../config/goto.php', 'goto');
+
+        $this->app->bind(GotoClientContract::class, GotoClient::class);
 
         $this->app->bind(Webinar::class, function () {
             return new Webinar();

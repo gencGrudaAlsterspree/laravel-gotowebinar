@@ -3,13 +3,16 @@
 namespace Slakbal\Gotowebinar\Commands;
 
 use Illuminate\Console\Command;
+use Slakbal\Gotowebinar\Traits\ConfigHelper;
 
 class GoToGenerateLinkCommand extends Command
 {
+    use ConfigHelper;
 
-    protected $signature = 'goto:generate-link {--state=}';
+    protected $signature = 'goto:generate-link {--state=} {--connection=}';
 
     protected $description = 'Generate an authorization link to receive an authorization code.
+                              {--connection} The connection to generate this link for.
                               {--state} Pass a state to prevent cross-site request forgery';
 
     protected $scheme = 'https://api.getgo.com/oauth/v2/authorize?client_id={client_id}&response_type=code&redirect_uri={redirect_uri}{state}';
@@ -17,18 +20,15 @@ class GoToGenerateLinkCommand extends Command
     public function handle()
     {
         $state = $this->option('state', null);
-
-        // clear cache first
-        $this->call('cache:clear');
+        $connection = $this->option('connection', null);
 
         $link = str_replace([
             '{client_id}',
             '{redirect_uri}',
             '{state}'
         ], [
-            config('goto.client_id'),
-            // @todo: check if null?
-            config('goto.redirect_uri'),
+            $this->getFromConnection($connection,'client_id'),
+            $this->getFromConnection($connection, 'redirect_uri'),
             $state ? "&state={$state}" : ''
         ], $this->scheme);
 
@@ -37,9 +37,8 @@ class GoToGenerateLinkCommand extends Command
                            "The returned authorization code will be exchanged for an access-token and\n".
                            "invalidates after the exchange.\n\n".
                            "Read for more info: https://developer.goto.com/guides/HowTos/03_HOW_accessToken/\n\n");
-        $this->line('-- Authorization link: ---------------------');
+        $this->line('-- Authorization link: --');
         $this->line($link);
-        $this->line('============================================');
     }
 
 }

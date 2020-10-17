@@ -6,8 +6,9 @@ use Httpful\Mime;
 use Httpful\Request;
 use Slakbal\Gotowebinar\Exception\GotoException;
 use Slakbal\Gotowebinar\Traits\Debug;
+use Slakbal\Gotowebinar\Contract\GotoClientContract;
 
-final class GotoClient
+class GotoClient implements GotoClientContract
 {
     use Authenticable, PathBuilder, Debug;
 
@@ -134,7 +135,7 @@ final class GotoClient
         return $this->processResponse($response, self::DELETE);
     }
 
-    private function processResponse($response, $verb)
+    protected function processResponse($response, $verb)
     {
         if ($response->code >= 100 && $response->code < 300) {
             switch ($verb) {

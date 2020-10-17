@@ -8,6 +8,7 @@ trait RequestHelpers
 {
     /**
      * Returns the payload for the message (alias for toArray).
+     * @todo: but toArray() isn't used?
      *
      * @return array
      */
@@ -34,6 +35,7 @@ trait RequestHelpers
         return $values;
     }
 
+    // @todo: this seems to be an optimized version of toArray()? I doubt this is faster ..
     public function toArray2()
     {
         //list of variables to be filtered out

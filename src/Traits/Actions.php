@@ -2,11 +2,26 @@
 
 namespace Slakbal\Gotowebinar\Traits;
 
-use Slakbal\Gotowebinar\Client\GotoClient;
+use Slakbal\Gotowebinar\Contract\GotoClientContract;
 
 trait Actions
 {
     use RequestHelpers;
+
+    protected $connection;
+
+    public function connection(string $connection)
+    {
+        $this->connection = $connection;
+
+        return $this;
+    }
+
+    public function getGotoClient()
+    {
+        return app(GotoClientContract::class)
+            ->setConnection($this->connection);
+    }
 
     public function dump(array $data = [])
     {
@@ -42,7 +57,7 @@ trait Actions
         //validate if the required fields are set
         $this->validate($this->requiredFields());
 
-        return (new GotoClient())->setPath($this->getResourceFullPath())
+        return $this->getGotoClient()->setPath($this->getResourceFullPath())
                                  ->setPathKeys($this->pathKeys)
                                  ->setParameters($this->queryParameters)
                                  ->setPayload($this->getPayload())
@@ -54,7 +69,7 @@ trait Actions
         //set all the properties of the parent
         $this->setDataByMethod($data);
 
-        return (new GotoClient())->setPath($this->getResourceFullPath())
+        return $this->getGotoClient()->setPath($this->getResourceFullPath())
                                  ->setPathKeys($this->pathKeys)
                                  ->setParameters($this->queryParameters)
                                  ->setPayload($this->getPayload())
@@ -63,7 +78,7 @@ trait Actions
 
     public function get()
     {
-        return (new GotoClient())->setPath($this->getResourceFullPath())
+        return $this->getGotoClient()->setPath($this->getResourceFullPath())
                                  ->setPathKeys($this->pathKeys)
                                  ->setParameters($this->queryParameters)
                                  ->setPayload($this->getPayload())
@@ -72,7 +87,7 @@ trait Actions
 
     public function delete()
     {
-        return (new GotoClient())->setPath($this->getResourceFullPath())
+        return $this->getGotoClient()->setPath($this->getResourceFullPath())
                                  ->setPathKeys($this->pathKeys)
                                  ->setParameters($this->queryParameters)
                                  ->setPayload($this->getPayload())
@@ -81,16 +96,16 @@ trait Actions
 
     public function status()
     {
-        return (new GotoClient())->status();
+        return $this->getGotoClient()->status();
     }
 
     public function authenticate()
     {
-        return (new GotoClient())->authenticate();
+        return $this->getGotoClient()->authenticate();
     }
 
     public function flushAuthentication()
     {
-        return (new GotoClient())->flushAuthentication();
+        return $this->getGotoClient()->flushAuthentication();
     }
 }
