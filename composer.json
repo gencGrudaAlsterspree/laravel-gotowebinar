@@ -1,6 +1,6 @@
 {
-  "name": "slakbal/gotowebinar",
-  "description": "GotoWebinar API wrapper for laravel 5+",
+  "name": "wize-wiz/laravel-gotowebinar",
+  "description": "GotoWebinar API wrapper for laravel",
   "license": "MIT",
   "keywords": [
     "gotowebinar",
@@ -11,6 +11,11 @@
     {
       "name": "Leslie Price",
       "email": "leslie.price78@gmail.com",
+      "role": "Developer"
+    },
+    {
+      "name": "wize-wiz",
+      "email": "wize-wiz@git.wizdom.de",
       "role": "Developer"
     }
   ],
@@ -24,12 +29,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Slakbal\\Gotowebinar\\": "src/"
+      "WizeWiz\\Gotowebinar\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Slakbal\\Gotowebinar\\Tests\\": "tests/"
+      "WizeWiz\\Gotowebinar\\Tests\\": "tests/"
     }
   },
   "scripts": {
@@ -41,13 +46,13 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Slakbal\\Gotowebinar\\GotoWebinarServiceProvider"
+        "WizeWiz\\Gotowebinar\\GotoWebinarServiceProvider"
       ],
       "aliases": {
-        "Webinars": "Slakbal\\Gotowebinar\\Facade\\Webinars",
-        "Registrants": "Slakbal\\Gotowebinar\\Facade\\Registrants",
-        "Attendees": "Slakbal\\Gotowebinar\\Facade\\Attendees",
-        "Sessions": "Slakbal\\Gotowebinar\\Facade\\Sessions"
+        "Webinars": "WizeWiz\\Gotowebinar\\Facade\\Webinars",
+        "Registrants": "WizeWiz\\Gotowebinar\\Facade\\Registrants",
+        "Attendees": "WizeWiz\\Gotowebinar\\Facade\\Attendees",
+        "Sessions": "WizeWiz\\Gotowebinar\\Facade\\Sessions"
       }
     }
   },

@@ -1,53 +1,59 @@
 # GotoWebinar API wrapper for Laravel
 
-This package is a GotoWebinar API service wrapper and facade for Laravel 5.4+.
+This package is a GotoWebinar API service wrapper and facade for Laravel based on [slakbal/gotowebinar](https://github.com/slakbal/gotowebinar). I decided to completely rewrite this package to support more advanced features and publish it under a new namespace.
 
-This new release makes use of the latest version of the GotoWebinar API and Authentication methods. This release is not compatible with the previous versions and is a complete new implementation. 
+## What will change?
 
-## Compatible API Version
+#### This package will drop support for:
+- [ ] Laravel 5.x
+- [ ] GotoWebinar Direct Login
 
-https://goto-developer.logmeininc.com/content/gotowebinar-api-reference-v2
+#### Add support for:
+- [ ] Laravel 8.x
+- [ ] Queued jobs
+- [ ] Custom Events
+- [ ] Webhooks
+- [x] Supporting multiple accounts (connections)
+- [x] Caching authentication settings to `.json` files (persistent)
+- [ ] Changing redis caching authentication files from primer to optional
+- [x] Commands to easily control LogMeIn authentications
 
-## Known Issues
-
-* There are still some issues with the deletion of Registrants from a Webinar by registrantKey
-* Retrieving session attendees by registrantKey
-
-## Contributions and Bug
-
-Please create a pull request for any changes, update or bugs. Thanks!
+#### Other stuff:
+- [x] Namespace will be changed to `wize-wiz`, e.g. `WizeWiz` to resolve possible conflicts with the original package
+- [ ] This package will replace `nategood/httpful` for Guzzle in Laravel 6 and HTTP Client for Laravel 7/8. Where as HTTP Client is just another wrapper for Guzzle.
+- [ ] Rewrite the entire documentation.
 
 ## Installing
 
 You can use Composer to install the library
 
 ```
-composer require slakbal/gotowebinar
+composer require wize-wiz/laravel-gotowebinar
 ```
 
-If you have Laravel 5.5+ the package will be auto-discovered:
+This package will be auto-discovered:
 
 ```json
   "extra": {
     "laravel": {
       "providers": [
-        "Slakbal\\Gotowebinar\\GotoWebinarServiceProvider"
+        "WizeWiz\\Gotowebinar\\GotoWebinarServiceProvider"
       ],
       "aliases": {
-        "Webinars": "Slakbal\\Gotowebinar\\Facade\\Webinars",
-        "Registrants": "Slakbal\\Gotowebinar\\Facade\\Registrants",
-        "Attendees": "Slakbal\\Gotowebinar\\Facade\\Attendees"
+        "Webinars": "WizeWiz\\Gotowebinar\\Facade\\Webinars",
+        "Registrants": "WizeWiz\\Gotowebinar\\Facade\\Registrants",
+        "Attendees": "WizeWiz\\Gotowebinar\\Facade\\Attendees"
       }
     }
   },
 ```
 
-Otherwise, find the `providers` array in the `config/app.php` file and add the following Service Provider:
+To register manually, find the `providers` array in the `config/app.php` file and add the following Service Provider:
 
 ```php
 'providers' => [
   // ...
-  Slakbal\Gotowebinar\GotoWebinarServiceProvider::class
+  WizeWiz\Gotowebinar\GotoWebinarServiceProvider::class
 ];
 ```
 
@@ -56,10 +62,10 @@ Now find the `aliases` array in the same config file and add the following Facad
 ```php
 'aliases' => [
   // ...
-  'Webinars' => Slakbal\\Gotowebinar\\Facade\\Webinars,
-  'Registrants' => Slakbal\\Gotowebinar\\Facade\\Registrants,
-  'Attendees' => Slakbal\\Gotowebinar\\Facade\\Attendees
-  'Sessions' => Slakbal\\Gotowebinar\\Facade\\Sessions
+  'Webinars' => WizeWiz\\Gotowebinar\\Facade\\Webinars,
+  'Registrants' => WizeWiz\\Gotowebinar\\Facade\\Registrants,
+  'Attendees' => WizeWiz\\Gotowebinar\\Facade\\Attendees
+  'Sessions' => WizeWiz\\Gotowebinar\\Facade\\Sessions
 ];
 ```
 
@@ -116,6 +122,8 @@ php artisan goto:access-token
 ```
 
 ### Authorizing using the deprecated Direct Login method
+
+> Support for Direct Login will be phased out in the coming releases!
 
 If your account is still able to use the [Direct Login](https://goto-developer.logmeininc.com/how-use-direct-login) method (using `grand_type=password`, you can create an App with API access keys here: [GotoWebinar Developer portal](https://goto-developer.logmeininc.com). Look for the `My Apps` menu.
 
@@ -187,11 +195,11 @@ Once your config values are set the authentication tokens etc. are cached and ex
 
 So caching the token results in one less round trip to GotoWebinar servers thus improved performance. If you want to manipulate the state manually the following methods can be used:
 
-```php    
+```php
     Webinars::status();
-    
+
     //note methods are also chainable
-    Webinars::authenticate()->status(); 
+    Webinars::authenticate()->status();
 
     Webinars::flushAuthentication()->status();
 ```
@@ -582,9 +590,3 @@ Delete a specific registrant by webinarKey and registrantKey, method returns `tr
                    ->surveys()
                    ->get();
 ```
-
-Your contribution or bug fixes are welcome!
-
-Enjoy!
-
-Slakkie
