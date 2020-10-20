@@ -1,9 +1,9 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Facade;
+namespace WizeWiz\Gotowebinar\Facade;
 
 use Illuminate\Support\Facades\Facade;
-use Slakbal\Gotowebinar\Resources\Session\Session;
+use WizeWiz\Gotowebinar\Resources\Session\Session;
 
 class Sessions extends Facade
 {

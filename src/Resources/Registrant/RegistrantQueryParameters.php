@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Resources\Registrant;
+namespace WizeWiz\Gotowebinar\Resources\Registrant;
 
 trait RegistrantQueryParameters
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Client;
+namespace WizeWiz\Gotowebinar\Client;
 
 use Httpful\Mime;
 use Httpful\Request;
-use Slakbal\Gotowebinar\Exception\GotoException;
-use Slakbal\Gotowebinar\Traits\Debug;
-use Slakbal\Gotowebinar\Contract\GotoClientContract;
+use WizeWiz\Gotowebinar\Exception\GotoException;
+use WizeWiz\Gotowebinar\Traits\Debug;
+use WizeWiz\Gotowebinar\Contract\GotoClientContract;
 
 class GotoClient implements GotoClientContract
 {

@@ -6,7 +6,7 @@ Route::get('webinars/{webinarKey}/registrants', function ($webinarKey) {
                                ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -42,7 +42,7 @@ Route::get('webinars/{webinarKey}/registrants/create', function ($webinarKey) {
                                         ]);
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -60,7 +60,7 @@ Route::get('webinars/{webinarKey}/registrants/{registrantKey}/view', function ($
                                ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -78,7 +78,7 @@ Route::get('webinars/{webinarKey}/registrants/{registrantKey}/delete', function 
                                ->delete();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });

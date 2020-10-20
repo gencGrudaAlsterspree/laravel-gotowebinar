@@ -1,9 +1,9 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Exception;
+namespace WizeWiz\Gotowebinar\Exception;
 
 use Illuminate\Http\Response;
-use Slakbal\Gotowebinar\Traits\Debug;
+use WizeWiz\Gotowebinar\Traits\Debug;
 
 class GotoException extends \Exception
 {

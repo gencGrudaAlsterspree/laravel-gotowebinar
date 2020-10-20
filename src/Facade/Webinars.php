@@ -1,9 +1,9 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Facade;
+namespace WizeWiz\Gotowebinar\Facade;
 
 use Illuminate\Support\Facades\Facade;
-use Slakbal\Gotowebinar\Resources\Webinar\Webinar;
+use WizeWiz\Gotowebinar\Resources\Webinar\Webinar;
 
 class Webinars extends Facade
 {

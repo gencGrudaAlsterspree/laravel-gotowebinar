@@ -1,10 +1,10 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Commands;
+namespace WizeWiz\Gotowebinar\Commands;
 
 use Illuminate\Console\Command;
-use Slakbal\Gotowebinar\Client\GotoClient;
-use Slakbal\Gotowebinar\Facade\Webinars;
+use WizeWiz\Gotowebinar\Client\GotoClient;
+use WizeWiz\Gotowebinar\Facade\Webinars;
 
 class GoToTokensCommand extends Command
 {

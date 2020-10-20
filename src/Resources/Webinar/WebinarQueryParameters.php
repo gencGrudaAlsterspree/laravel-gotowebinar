@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Resources\Webinar;
+namespace WizeWiz\Gotowebinar\Resources\Webinar;
 
 use Carbon\Carbon;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Traits;
+namespace WizeWiz\Gotowebinar\Traits;
 
-use Slakbal\Gotowebinar\Exception\InvalidResource;
+use WizeWiz\Gotowebinar\Exception\InvalidResource;
 
 trait ClassHelpers
 {

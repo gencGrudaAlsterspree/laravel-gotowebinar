@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Exception;
+namespace WizeWiz\Gotowebinar\Exception;
 
 class InvalidResource extends GotoException
 {

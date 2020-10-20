@@ -1,18 +1,18 @@
 <?php
 
-namespace Slakbal\Gotowebinar;
+namespace WizeWiz\Gotowebinar;
 
 use Illuminate\Support\ServiceProvider;
-use Slakbal\Gotowebinar\Client\GotoClient;
-use Slakbal\Gotowebinar\Commands\GoToAccessTokenCommand;
-use Slakbal\Gotowebinar\Commands\GoToAuthorizeLinkCommand;
-use Slakbal\Gotowebinar\Commands\GoToGenerateLinkCommand;
-use Slakbal\Gotowebinar\Commands\GoToTokensCommand;
-use Slakbal\Gotowebinar\Contract\GotoClientContract;
-use Slakbal\Gotowebinar\Resources\Attendee\Attendee;
-use Slakbal\Gotowebinar\Resources\Registrant\Registrant;
-use Slakbal\Gotowebinar\Resources\Session\Session;
-use Slakbal\Gotowebinar\Resources\Webinar\Webinar;
+use WizeWiz\Gotowebinar\Client\GotoClient;
+use WizeWiz\Gotowebinar\Commands\GoToAccessTokenCommand;
+use WizeWiz\Gotowebinar\Commands\GoToAuthorizeLinkCommand;
+use WizeWiz\Gotowebinar\Commands\GoToGenerateLinkCommand;
+use WizeWiz\Gotowebinar\Commands\GoToTokensCommand;
+use WizeWiz\Gotowebinar\Contract\GotoClientContract;
+use WizeWiz\Gotowebinar\Resources\Attendee\Attendee;
+use WizeWiz\Gotowebinar\Resources\Registrant\Registrant;
+use WizeWiz\Gotowebinar\Resources\Session\Session;
+use WizeWiz\Gotowebinar\Resources\Webinar\Webinar;
 
 class GotoWebinarServiceProvider extends ServiceProvider
 {

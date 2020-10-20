@@ -17,7 +17,7 @@ Route::get('sessions', function () {
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -35,7 +35,7 @@ Route::get('webinars/{webinarKey}/sessions', function ($webinarKey) {
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -47,7 +47,7 @@ Route::get('webinars/{webinarKey}/sessions/{sessionKey}', function ($webinarKey,
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -60,7 +60,7 @@ Route::get('webinars/{webinarKey}/sessions/{sessionKey}/performance', function (
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -73,7 +73,7 @@ Route::get('webinars/{webinarKey}/sessions/{sessionKey}/polls', function ($webin
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -86,7 +86,7 @@ Route::get('webinars/{webinarKey}/sessions/{sessionKey}/questions', function ($w
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -99,7 +99,7 @@ Route::get('webinars/{webinarKey}/sessions/{sessionKey}/surveys', function ($web
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });

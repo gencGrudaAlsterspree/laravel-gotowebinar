@@ -17,7 +17,7 @@ Route::get('account', function () {
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -38,7 +38,7 @@ Route::get('webinars', function () {
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -49,7 +49,7 @@ Route::get('webinars/{webinarKey}/view', function ($webinarKey) {
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -68,7 +68,7 @@ Route::get('webinars/create', function () {
                             ->create();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -86,7 +86,7 @@ Route::get('webinars/createByArray', function () {
                                      ]);
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -101,7 +101,7 @@ Route::get('webinars/{webinarKey}/update', function ($webinarKey) {
                             ->update();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -118,7 +118,7 @@ Route::get('webinars/{webinarKey}/updateByArray', function ($webinarKey) {
                                      ]);
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -130,7 +130,7 @@ Route::get('webinars/{webinarKey}/delete', function ($webinarKey) {
                             ->delete();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -149,7 +149,7 @@ Route::get('webinars/{webinarKey}/attendees', function ($webinarKey) {
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });

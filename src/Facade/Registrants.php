@@ -1,9 +1,9 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Facade;
+namespace WizeWiz\Gotowebinar\Facade;
 
 use Illuminate\Support\Facades\Facade;
-use Slakbal\Gotowebinar\Resources\Registrant\Registrant;
+use WizeWiz\Gotowebinar\Resources\Registrant\Registrant;
 
 class Registrants extends Facade
 {

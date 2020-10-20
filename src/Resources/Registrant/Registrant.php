@@ -1,9 +1,9 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Resources\Registrant;
+namespace WizeWiz\Gotowebinar\Resources\Registrant;
 
-use Slakbal\Gotowebinar\Resources\AbstractResource;
-use Slakbal\Gotowebinar\Resources\Timezone;
+use WizeWiz\Gotowebinar\Resources\AbstractResource;
+use WizeWiz\Gotowebinar\Resources\Timezone;
 
 final class Registrant extends AbstractResource
 {

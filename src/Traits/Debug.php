@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Traits;
+namespace WizeWiz\Gotowebinar\Traits;
 
 use Illuminate\Support\Facades\Log;
 

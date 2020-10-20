@@ -1,8 +1,8 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Traits;
+namespace WizeWiz\Gotowebinar\Traits;
 
-use Slakbal\Gotowebinar\Contract\GotoClientContract;
+use WizeWiz\Gotowebinar\Contract\GotoClientContract;
 
 trait Actions
 {

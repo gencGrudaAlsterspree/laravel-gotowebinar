@@ -1,10 +1,10 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Resources;
+namespace WizeWiz\Gotowebinar\Resources;
 
-use Slakbal\Gotowebinar\Contract\GotoWebinar;
-use Slakbal\Gotowebinar\Traits\Actions;
-use Slakbal\Gotowebinar\Traits\ClassHelpers;
+use WizeWiz\Gotowebinar\Contract\GotoWebinar;
+use WizeWiz\Gotowebinar\Traits\Actions;
+use WizeWiz\Gotowebinar\Traits\ClassHelpers;
 
 abstract class AbstractResource implements GotoWebinar
 {

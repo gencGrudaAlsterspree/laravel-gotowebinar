@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Resources\Attendee;
+namespace WizeWiz\Gotowebinar\Resources\Attendee;
 
 /*
  * Operations available for attendees of a given webinar session.

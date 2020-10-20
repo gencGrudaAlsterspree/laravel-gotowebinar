@@ -1,11 +1,11 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Client;
+namespace WizeWiz\Gotowebinar\Client;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
-use Slakbal\Gotowebinar\Traits\ConfigHelper;
+use WizeWiz\Gotowebinar\Traits\ConfigHelper;
 
 trait AccessProvider
 {

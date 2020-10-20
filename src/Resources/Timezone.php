@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Resources;
+namespace WizeWiz\Gotowebinar\Resources;
 
 class Timezone
 {

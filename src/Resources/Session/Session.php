@@ -1,8 +1,8 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Resources\Session;
+namespace WizeWiz\Gotowebinar\Resources\Session;
 
-use Slakbal\Gotowebinar\Resources\AbstractResource;
+use WizeWiz\Gotowebinar\Resources\AbstractResource;
 
 final class Session extends AbstractResource
 {

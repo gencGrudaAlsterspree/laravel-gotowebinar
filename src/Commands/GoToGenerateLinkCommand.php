@@ -1,9 +1,9 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Commands;
+namespace WizeWiz\Gotowebinar\Commands;
 
 use Illuminate\Console\Command;
-use Slakbal\Gotowebinar\Traits\ConfigHelper;
+use WizeWiz\Gotowebinar\Traits\ConfigHelper;
 
 class GoToGenerateLinkCommand extends Command
 {

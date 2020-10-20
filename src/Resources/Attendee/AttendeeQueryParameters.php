@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Resources\Attendee;
+namespace WizeWiz\Gotowebinar\Resources\Attendee;
 
 trait AttendeeQueryParameters
 {

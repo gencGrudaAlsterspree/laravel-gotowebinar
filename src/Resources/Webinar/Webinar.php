@@ -1,13 +1,13 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Resources\Webinar;
+namespace WizeWiz\Gotowebinar\Resources\Webinar;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use Slakbal\Gotowebinar\Resources\AbstractResource;
-use Slakbal\Gotowebinar\Resources\EmailSettings;
-use Slakbal\Gotowebinar\Resources\Time;
-use Slakbal\Gotowebinar\Resources\Timezone;
+use WizeWiz\Gotowebinar\Resources\AbstractResource;
+use WizeWiz\Gotowebinar\Resources\EmailSettings;
+use WizeWiz\Gotowebinar\Resources\Time;
+use WizeWiz\Gotowebinar\Resources\Timezone;
 
 final class Webinar extends AbstractResource
 {
@@ -99,7 +99,7 @@ final class Webinar extends AbstractResource
      * Set the subject.
      *
      * @param string $subject
-     * @return \Slakbal\Gotowebinar\Objects\Webinar
+     * @return \WizeWiz\Gotowebinar\Objects\Webinar
      */
     public function subject($subject): self
     {
@@ -226,7 +226,7 @@ final class Webinar extends AbstractResource
     /**
      * Set the object.
      *
-     * @return \Slakbal\Gotowebinar\Objects\Webinar
+     * @return \WizeWiz\Gotowebinar\Objects\Webinar
      */
     public function setEmailSettings(): self
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Resources\Session;
+namespace WizeWiz\Gotowebinar\Resources\Session;
 
 /*
  * Operations available for sessions of a given webinar.

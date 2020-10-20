@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Resources\Webinar;
+namespace WizeWiz\Gotowebinar\Resources\Webinar;
 
 trait WebinarOperations
 {
@@ -18,7 +18,7 @@ trait WebinarOperations
      * Set the webinar key and path.
      *
      * @param string $subject
-     * @return \Slakbal\Gotowebinar\Objects\Webinar
+     * @return \WizeWiz\Gotowebinar\Objects\Webinar
      */
     public function webinarKey($webinarKey): self
     {

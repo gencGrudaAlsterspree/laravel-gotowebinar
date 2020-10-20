@@ -1,12 +1,12 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Commands;
+namespace WizeWiz\Gotowebinar\Commands;
 
 use Illuminate\Console\Command;
-use Slakbal\Gotowebinar\Client\GotoClient;
-use Slakbal\Gotowebinar\Contract\GotoClientContract;
-use Slakbal\Gotowebinar\Facade\Webinars;
-use Slakbal\Gotowebinar\Traits\ConfigHelper;
+use WizeWiz\Gotowebinar\Client\GotoClient;
+use WizeWiz\Gotowebinar\Contract\GotoClientContract;
+use WizeWiz\Gotowebinar\Facade\Webinars;
+use WizeWiz\Gotowebinar\Traits\ConfigHelper;
 
 use Exception;
 
