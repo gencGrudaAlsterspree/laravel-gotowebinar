@@ -22,32 +22,32 @@ trait ConfigHelper {
      */
     public function getUsername()
     {
-        return $this->getFromConnection($this->connection, 'username');
+        return $this->getFromConnection($this->getConnection(), 'username');
     }
 
     public function getPassword()
     {
-        return $this->getFromConnection($this->connection, 'password');
+        return $this->getFromConnection($this->getConnection(), 'password');
     }
 
     public function getClientId()
     {
-        return $this->getFromConnection($this->connection, 'client_id');
+        return $this->getFromConnection($this->getConnection(), 'client_id');
     }
 
     public function getClientSecret()
     {
-        return $this->getFromConnection($this->connection, 'client_secret');
+        return $this->getFromConnection($this->getConnection(), 'client_secret');
     }
 
     public function getRedirectUri()
     {
-        return $this->getFromConnection($this->connection, 'redirect_uri');
+        return $this->getFromConnection($this->getConnection(), 'redirect_uri');
     }
 
     public function getAuthorizationCode()
     {
-        return $this->getFromConnection($this->connection, 'authorization_code');
+        return $this->getFromConnection($this->getConnection(), 'authorization_code');
     }
 
 }

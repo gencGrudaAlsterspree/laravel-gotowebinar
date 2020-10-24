@@ -5,7 +5,6 @@ namespace WizeWiz\Gotowebinar;
 use Illuminate\Support\ServiceProvider;
 use WizeWiz\Gotowebinar\Client\GotoClient;
 use WizeWiz\Gotowebinar\Commands\GoToAccessTokenCommand;
-use WizeWiz\Gotowebinar\Commands\GoToAuthorizeLinkCommand;
 use WizeWiz\Gotowebinar\Commands\GoToGenerateLinkCommand;
 use WizeWiz\Gotowebinar\Commands\GoToTokensCommand;
 use WizeWiz\Gotowebinar\Contract\GotoClientContract;

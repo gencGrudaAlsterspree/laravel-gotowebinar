@@ -161,7 +161,7 @@ Route::get('webinars/{webinarKey}/meetingtimes', function ($webinarKey) {
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -173,7 +173,7 @@ Route::get('webinars/{webinarKey}/audio', function ($webinarKey) {
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -185,7 +185,7 @@ Route::get('webinars/{webinarKey}/performance', function ($webinarKey) {
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });
@@ -201,7 +201,7 @@ Route::get('webinars/insession', function () {
                             ->get();
 
         return [$response];
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 });

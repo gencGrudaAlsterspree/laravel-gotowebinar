@@ -1,11 +1,11 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Client;
+namespace WizeWiz\Gotowebinar\Client;
 
 use Carbon\Carbon;
 use Httpful\Request;
 use Illuminate\Http\Response;
-use Slakbal\Gotowebinar\Exception\GotoException;
+use WizeWiz\Gotowebinar\Exception\GotoException;
 
 trait Authenticable
 {
@@ -15,18 +15,14 @@ trait Authenticable
 
     public function authenticate()
     {
-        if(! $this->hasAccessToken() && $this->hasStoredAccessInformation($this->getConnection()))  {
+        if(! $this->hasAccessToken() && $this->hasStoredAccessInformation($this->getConnection(), 'access'))  {
             $this->restoreAccessFromStorage();
         }
 
         if (! $this->hasAccessToken()) {
-            if ($this->hasRefreshToken()) {
-                //Get new bearer token with refresh token
-                $this->refreshAccessToken();
-            } else {
-                //Perform fresh authentication for bearer and refresh token
+            $this->hasRefreshToken() ?
+                $this->refreshAccessToken() :
                 $this->authenticateClient();
-            }
         }
 
         return $this;
@@ -35,15 +31,20 @@ trait Authenticable
     public function restoreAccessFromStorage()
     {
         $information = (object) array_merge($this->getAccessInformationDefaults(),
-            $this->getStoredAccessInformation($this->getConnection()));
+            $this->getStoredAccessInformation($this->getConnection(), 'access'));
 
+        // verify expires in
         if(!$information->expires_in) {
-            // let it be expired.
-            $information->expires_in = Carbon::now()->subDay();
+            $information->expires_in = 3600;
         }
 
-        if(!$information->expires_in instanceof Carbon) {
-            $information->expires_in = Carbon::createFromTimestamp(strtotime($information->expires_in));
+        $information->expires_at =
+            property_exists($information, 'expires_at') && is_integer($information->expires_at) ?
+                Carbon::createFromTimestamp($information->expires_at) :
+                Carbon::now()->subHour();
+
+        if($information->expires_at <= Carbon::now()) {
+            $information->access_token = null;
         }
 
         $this->cacheAccessInformation($information);
@@ -60,26 +61,21 @@ trait Authenticable
     public function refreshAccessToken()
     {
         $response = $this->sendAuthenticationRequest([
-                                                         'grant_type' => 'refresh_token',
-                                                         'refresh_token' => $this->getRefreshToken(),
-                                                     ]);
+             'grant_type' => 'refresh_token',
+             'refresh_token' => $this->getRefreshToken(),
+         ], false);
 
-        // explicitly set only the Access Token so that the refresh token's ttl expiry is not affected
-        // @note: No, the TTL does not decide validation, a new refresh_token could be supplied 1 hour, 3 days or 3 weeks
-        //          before "official" expiry, this is not in our control and therefor we should ALWAYS check validity of
-        //          the refresh_token that was returned with the request.
-        $this->setAccessToken($response->access_token, $response->expires_in);
-        // @todo: the problem here is if the cache is cleared, we won't have a persistent refresh token.
-        $this->verifyRefreshToken($response->refresh_token);
+        $this->processAuthorizationRequest($response);
 
         return $response;
     }
 
     public function verifyRefreshToken($refresh_token)
     {
-        if($this->getRefreshToken() !== $refresh_token) {
+        $connection = $this->getConnection();
+        if($this->getRefreshToken() !== $refresh_token || $this->hasStoredRefreshTokenRequest($connection)) {
             $this->setRefreshToken($refresh_token);
-            $this->storeRefreshTokenRequest($refresh_token, $this->getConnection());
+            $this->storeRefreshTokenRequest($refresh_token, $connection);
         }
     }
 
@@ -91,19 +87,19 @@ trait Authenticable
     }
 
     /**
-     * @deprecated
+     * @deprecated: will be removed in v1.2
      * @todo: drop support
      */
     protected function authenticateDirect()
     {
         $response = $this->sendAuthenticationRequest([
-                                                         'grant_type' => 'password',
-                                                         'username' => $this->getUsername(),
-                                                         'password' => $this->getPassword(),
-                                                         'client_id' => $this->getClientId(),
-                                                     ]);
+             'grant_type' => 'password',
+             'username' => $this->getUsername(),
+             'password' => $this->getPassword(),
+             'client_id' => $this->getClientId(),
+         ]);
 
-        $this->processAuthentication($response);
+        $this->processAuthorizationRequest($response);
 
         return $response;
     }
@@ -111,24 +107,25 @@ trait Authenticable
     protected function authenticateCode()
     {
         $response = $this->sendAuthenticationRequest([
-                                                        'grant_type' => 'authorization_code',
-                                                        'redirect_uri' => $this->getRedirectUri(),
-                                                        'code' => $this->getAuthorizationCode(),
-                                                    ]);
+            'grant_type' => 'authorization_code',
+            'redirect_uri' => $this->getRedirectUri(),
+            'code' => $this->getAuthorizationCode(),
+        ]);
 
-        $this->processAuthentication($response);
+        $this->processAuthorizationRequest($response);
 
         return $response;
     }
 
-    protected function processAuthentication($response)
+    protected function processAuthorizationRequest($response)
     {
         $connection = $this->getConnection();
         $response->expires_at = Carbon::now()->addSeconds($response->expires_in ?? 3600)->timestamp;
 
+        // verify refresh token before being cached.
+        $this->verifyRefreshToken($response->refresh_token);
         $this->cacheAccessInformation($response);
         $this->storeAccessInformation($response, $connection);
-        $this->storeRefreshTokenRequest($response->refresh_token, $connection);
     }
 
     protected function sendAuthenticationRequest(array $payload)

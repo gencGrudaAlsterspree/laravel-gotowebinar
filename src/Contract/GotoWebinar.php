@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Contract;
+namespace WizeWiz\Gotowebinar\Contract;
 
 interface GotoWebinar
 {

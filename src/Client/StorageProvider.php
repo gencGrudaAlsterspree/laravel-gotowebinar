@@ -1,11 +1,11 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Client;
+namespace WizeWiz\Gotowebinar\Client;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Slakbal\Gotowebinar\Traits\ConfigHelper;
+use WizeWiz\Gotowebinar\Traits\ConfigHelper;
 
 trait StorageProvider
 {
@@ -35,37 +35,54 @@ trait StorageProvider
 
     public function hasStoredAccessInformation($connection) : bool
     {
-        return $this->getStorageDisk()->has($this->getStorageRelativeFilepath($connection));
+        return $this->getStorageDisk()->has($this->getStorageRelativeFilepath($connection, 'access'));
     }
 
     public function getStoredAccessInformation($connection) : ?array
     {
         $information = [];
         if($this->hasStoredAccessInformation($connection)) {
-            $information = json_decode($this->getStorageDisk()->get($this->getStorageRelativeFilepath($connection)), true) ?? [];
+            $information = json_decode($this->getStorageDisk()->get($this->getStorageRelativeFilepath($connection, 'access')), true) ?? [];
         }
         return $information;
     }
 
     public function storeAccessInformation(object $information, $connection) : bool
     {
-        return $this->getStorageDisk()->put($this->getStorageRelativeFilepath($connection), json_encode($information));
+        return $this->getStorageDisk()->put($this->getStorageRelativeFilepath($connection, 'access'), json_encode($information));
     }
 
-    public function storeRefreshTokenRequest($refresh_token, $connection) : bool {
+    public function storeRefreshTokenRequest($refresh_token, $connection) : bool
+    {
+        $ttl = 30*24*60*60;
+        $now = Carbon::now();
         return $this->getStorageDisk()->put($this->getStorageRelativeFilepath($connection, 'request'), json_encode([
             'refresh-token' => $refresh_token,
-            'request-time' => Carbon::now()->timestamp,
-            'ttl' => 30*24*60*60,
-            'expires-at' => Carbon::now()->addDays(30)->timestamp
+            'request-time' => $now->timestamp,
+            'ttl' => $ttl,
+            'expires-at' => $now->addSeconds($ttl)->timestamp
         ]));
+    }
+
+    public function hasStoredRefreshTokenRequest($connection) : bool
+    {
+        return $this->getStorageDisk()->has($this->getStorageRelativeFilepath($connection, 'request'));
+    }
+
+    public function getStoredRefreshTokenRequest($connection) : ?array
+    {
+        $information = [];
+        if($this->hasStoredAccessInformation($connection)) {
+            $information = json_decode($this->getStorageDisk()->get($this->getStorageRelativeFilepath($connection, 'request')), true) ?? [];
+        }
+        return $information;
     }
 
     public function clearAuthStorage($connection)
     {
         if($this->hasStoredAccessInformation($connection)) {
             $disk = $this->getStorageDisk();
-            $disk->delete($this->getStorageRelativeFilepath($connection));
+            $disk->delete($this->getStorageRelativeFilepath($connection, 'access'));
             $disk->delete($this->getStorageRelativeFilepath($connection, 'request'));
         }
     }

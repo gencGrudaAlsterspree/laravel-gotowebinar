@@ -29,15 +29,15 @@ trait AccessProvider
         return $this->connection ?? $this->getFromConfig('connection_default', 'default');
     }
 
-    public function getConnectionTag($connection)
+    public function getConnectionTag($connection = null)
     {
-        return "GOTO-CONNECTION:" . ($connection ?? $this->connection);
+        return "GOTO-CONNECTION:" . ($connection ?? $this->getConnection());
     }
 
     public function getCacheTags()
     {
-        return $this->connection ?
-            array_merge($this->cache_tags, [$this->getConnectionTag($this->connection)]) :
+        return ($connection_tag = $this->getConnectionTag()) ?
+            array_merge($this->cache_tags, [$connection_tag]) :
             $this->cache_tags;
     }
 
@@ -70,8 +70,11 @@ trait AccessProvider
 
     public function cacheAccessInformation(object $object)
     {
-        $this->setAccessToken($object->access_token, $object->expires_in)
-             ->setRefreshToken($object->refresh_token)
+        if($object->access_token) {
+            $this->setAccessToken($object->access_token, $object->expires_in);
+        }
+
+        $this->setRefreshToken($object->refresh_token)
              ->setOrganizerKey($object->organizer_key)
              ->setAccountKey($object->account_key);
 

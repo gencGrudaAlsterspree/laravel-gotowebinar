@@ -3,7 +3,6 @@
 namespace WizeWiz\Gotowebinar\Commands;
 
 use Illuminate\Console\Command;
-use WizeWiz\Gotowebinar\Client\GotoClient;
 use WizeWiz\Gotowebinar\Contract\GotoClientContract;
 use WizeWiz\Gotowebinar\Facade\Webinars;
 use WizeWiz\Gotowebinar\Traits\ConfigHelper;
@@ -42,7 +41,7 @@ class GoToAccessTokenCommand extends Command
             $this->flushAccess($flush_only);
 
             if($flush_only) {
-                return;
+                return null;
             }
         }
 
@@ -53,21 +52,26 @@ class GoToAccessTokenCommand extends Command
         $this->authorizeAccessToken();
     }
 
+    protected function createGotoClient()
+    {
+        return app(GotoClientContract::class)->setConnection($this->connection);
+    }
+
     protected function showReadyStatus()
     {
         // @todo: get by contract.
-        if(app(GotoClient::class)->setConnection($this->connection)->hasAccessToken()) {
+        if($this->createGotoClient()->hasAccessToken()) {
             $this->info("Valid access-token present for connection: {$this->connection}.");
         }
         else {
             $this->line("<error>!!</error> Valid-access token missing for connection: {$this->connection}.");
         }
-        return;
+        return null;
     }
 
     protected function flushAccess($flush_only)
     {
-        $result = Webinars::connection($this->connection)->flushAuthentication()->status();
+        $result = $this->createGotoClient()->flushAuthentication()->status();
         $this->call('cache:clear');
 
         if($flush_only) {
@@ -75,10 +79,11 @@ class GoToAccessTokenCommand extends Command
         }
     }
 
-    protected function authorizeAccessToken() {
+    protected function authorizeAccessToken()
+    {
         try {
-            $client = app(GotoClientContract::class);
-            $result = $client->authenticate()->status();
+
+            $result = $this->createGotoClient()->authenticate()->status();
 
             if (!empty($result)) {
                 if (array_key_exists('access_token', $result)) {
@@ -95,8 +100,7 @@ class GoToAccessTokenCommand extends Command
     protected function renewAccessToken()
     {
         try {
-            $client = app(GotoClientContract::class);
-            $result = $client->refreshAccessToken();
+            $result = $this->createGotoClient()->refreshAccessToken();
         } catch(Exception $e) {
             $this->error('Failed to renew Access-Token: ' . $e->getMessage());
         }

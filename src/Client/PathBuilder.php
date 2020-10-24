@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Client;
+namespace WizeWiz\Gotowebinar\Client;
 
 use Illuminate\Support\Str;
 
