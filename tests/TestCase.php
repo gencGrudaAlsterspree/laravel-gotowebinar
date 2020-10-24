@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Tests;
+namespace WizeWiz\Gotowebinar\Tests;
 
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 

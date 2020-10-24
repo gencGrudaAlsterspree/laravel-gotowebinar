@@ -226,7 +226,7 @@ For example:
                        ->noEmailAbsenteeFollowUp()
                        ->noEmailConfirmation()
                        ->create();
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 ```
@@ -283,7 +283,7 @@ The package will automatically log some major events and response errors for you
                        ->page($page)
                        ->size($size)
                        ->get();
-    } catch (Slakbal\Gotowebinar\Exception\GotoException $e) {
+    } catch (WizeWiz\Gotowebinar\Exception\GotoException $e) {
         return [$e->getMessage()];
     }
 ```

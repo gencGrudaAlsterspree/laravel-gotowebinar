@@ -1,6 +1,6 @@
 <?php
 
-namespace Slakbal\Gotowebinar\Tests;
+namespace WizeWiz\Gotowebinar\Tests;
 
 class RouteTest extends \Orchestra\Testbench\TestCase
 {
