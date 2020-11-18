@@ -18,7 +18,7 @@ trait Debug
 
     static function logInfo($msg, $context = [])
     {
-        if(static::debug) {
+        if(static::$debug) {
             Log::info($msg, $context);
         }
     }
