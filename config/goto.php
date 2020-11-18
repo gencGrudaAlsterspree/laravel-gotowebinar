@@ -102,4 +102,18 @@ return [
     'subject_suffix' => env('GOTO_SUBJECT_SUFFIX', null),
     'webinar_link' => env('GOTO_WEBINAR_LINK', 'https://global.gotowebinar.com/manageWebinar.tmpl?webinar=%s'),
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | HTTP Settings.
+    |--------------------------------------------------------------------------
+    |
+    | HTTP Settings.
+    |
+    */
+
+    'http' => [
+        'timeout' => 10 // seconds
+    ]
+
 ];

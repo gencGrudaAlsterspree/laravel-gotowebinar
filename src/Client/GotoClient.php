@@ -14,7 +14,7 @@ class GotoClient implements GotoClientContract
 
     protected $strict_ssl = false;
 
-    protected $timeout = 10; //seconds
+    protected $timeout; // seconds
 
     protected $path;
 
@@ -31,6 +31,18 @@ class GotoClient implements GotoClientContract
     const PUT = 'PUT';
 
     const DELETE = 'DELETE';
+
+    public function __construct()
+    {
+        $this->timeout = config('goto.http.timeout');
+    }
+
+    public function setTimeout(int $seconds)
+    {
+        $this->timeout = $seconds;
+
+        return $this;
+    }
 
     public function setPath(string $path)
     {
