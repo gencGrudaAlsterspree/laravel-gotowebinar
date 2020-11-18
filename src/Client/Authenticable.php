@@ -53,7 +53,8 @@ trait Authenticable
     public function flushAuthentication()
     {
         $this->clearAuthCache($this->connection);
-        $this->flushAccessInformation($this->connection);
+        // @todo: where has this method gone?
+        // $this->flushAccessInformation($this->connection);
 
         return $this;
     }
