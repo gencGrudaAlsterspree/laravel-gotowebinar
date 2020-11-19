@@ -34,7 +34,7 @@ class GotoClient implements GotoClientContract
 
     public function __construct()
     {
-        $this->timeout = config('goto.http.timeout');
+        $this->timeout = config('goto.http.timeout', 10);
     }
 
     public function setTimeout(int $seconds)
