@@ -14,6 +14,12 @@ trait WebinarOperations
         return $this;
     }
 
+    public function organizerKey($organizerKey) {
+        $this->pathKeys['organizerKey'] = $organizerKey;
+
+        return $this;
+    }
+
     /**
      * Set the webinar key and path.
      *

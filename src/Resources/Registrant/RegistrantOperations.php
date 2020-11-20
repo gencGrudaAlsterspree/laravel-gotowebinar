@@ -4,6 +4,13 @@ namespace WizeWiz\Gotowebinar\Resources\Registrant;
 
 trait RegistrantOperations
 {
+
+    public function organizerKey($organizerKey) {
+        $this->pathKeys['organizerKey'] = $organizerKey;
+
+        return $this;
+    }
+
     public function webinarKey($webinarKey): self
     {
         $this->pathKeys['webinarKey'] = $webinarKey;
