@@ -8,6 +8,13 @@ namespace WizeWiz\Gotowebinar\Resources\Attendee;
 
 trait AttendeeOperations
 {
+
+    public function organizerKey($organizerKey) {
+        $this->pathKeys['organizerKey'] = $organizerKey;
+
+        return $this;
+    }
+
     /**
      * Set the webinar key.
      */
