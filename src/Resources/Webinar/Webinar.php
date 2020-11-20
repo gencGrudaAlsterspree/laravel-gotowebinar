@@ -11,7 +11,9 @@ use WizeWiz\Gotowebinar\Resources\Timezone;
 
 final class Webinar extends AbstractResource
 {
-    use WebinarQueryParameters, WebinarOperations;
+
+    use WebinarQueryParameters,
+        WebinarOperations;
 
     /* CREATE SCHEMA *required
     {

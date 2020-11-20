@@ -2,35 +2,12 @@
 
 namespace WizeWiz\Gotowebinar\Resources\Session;
 
-use Carbon\Carbon;
+use WizeWiz\Gotowebinar\Traits\Resources\FromToTimeParameters;
+use WizeWiz\Gotowebinar\Traits\Resources\PagingParameters;
 
 trait SessionQueryParameters
 {
-    public function fromTime(Carbon $value): self
-    {
-        $this->queryParameters['fromTime'] = $value->toW3cString();
+    use PagingParameters,
+        FromToTimeParameters;
 
-        return $this;
-    }
-
-    public function toTime(Carbon $value): self
-    {
-        $this->queryParameters['toTime'] = $value->toW3cString();
-
-        return $this;
-    }
-
-    public function page($value): self
-    {
-        $this->queryParameters['page'] = $value;
-
-        return $this;
-    }
-
-    public function size($value): self
-    {
-        $this->queryParameters['size'] = $value;
-
-        return $this;
-    }
 }

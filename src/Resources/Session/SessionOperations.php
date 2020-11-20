@@ -8,6 +8,13 @@ namespace WizeWiz\Gotowebinar\Resources\Session;
 
 trait SessionOperations
 {
+
+    public function organizerKey($organizerKey) {
+        $this->pathKeys['organizerKey'] = $organizerKey;
+
+        return $this;
+    }
+
     public function webinarKey($webinarKey): self
     {
         $this->pathKeys['webinarKey'] = $webinarKey;
