@@ -19,8 +19,8 @@ class GoToGenerateLinkCommand extends Command
 
     public function handle()
     {
-        $state = $this->option('state', null);
-        $connection = $this->option('connection', 'default');
+        $state = $this->option('state') ?? null;
+        $connection = $this->option('connection') ?? 'default';
 
         $link = str_replace([
             '{client_id}',
