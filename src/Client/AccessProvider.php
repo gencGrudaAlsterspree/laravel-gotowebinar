@@ -45,8 +45,8 @@ trait AccessProvider
     {
         return [
             'ready' => $this->hasAccessToken() ? 'true' : 'false',
-            'access_token' => Str::limit($this->getAccessToken(), 10),
-            'refresh_token' => Str::limit($this->getRefreshToken(), 10),
+            'access_token' => $limit ? Str::limit($this->getAccessToken(), 10) : $this->getAccessToken(),
+            'refresh_token' => $limit ? Str::limit($this->getRefreshToken(), 10) : $this->getRefreshToken(),
             'organiser_key' => $limit ? Str::limit($this->getOrganizerKey(), 8) : $this->getOrganizerKey(),
             'account_key' => $limit ? Str::limit($this->getAccountKey(), 8) : $this->getAccountKey(),
             'expires_at' => $this->getExpiresAt()
